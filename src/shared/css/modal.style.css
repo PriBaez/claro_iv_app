@@ -1,0 +1,84 @@
+/* Fondo oscuro cuando el modal está activo */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+  }
+  
+  /* Modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1055;
+  background-color: #fff;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  width: 500px;
+  height: fit-content;
+  max-width: 90%;
+  max-height: 50vh; /* Evita que el modal sea demasiado alto */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cuerpo del modal con scroll si es necesario */
+.modal-body {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  min-height: 50px;
+  max-height: calc(50vh - 120px); /* Ajusta esto según sea necesario */
+  flex-grow: 1;
+}
+
+/* Permitir que el contenido del modal no se expanda innecesariamente */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 80vh;
+}
+  
+  /* Header del modal */
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+  }
+  
+  /* Título del modal */
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  
+  /* Botón de cerrar */
+  .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  
+  .btn-close:hover {
+    opacity: 1;
+  }
+  
+  /* Footer del modal */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+  }
+  
