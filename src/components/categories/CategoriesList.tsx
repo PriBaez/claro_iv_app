@@ -1,4 +1,5 @@
 import { Category } from "@models/Category";
+import "@shared/css/list.style.css";
 
 interface Props {
   categories: Category[];
@@ -8,13 +9,14 @@ interface Props {
 }
 const CategoriesList: React.FC<Props> = ({ categories, onAdd, onEdit, onDelete }) => {
   return (
-    <div className="container card text-center">
+    <div className="container card text-center justify-content-between">
       <div className="card-header row">
-        <div className="col-8">
+        <div className="col-8 m-0 flex-grow-1">
           <h5>Categorias</h5>
         </div>
-        <div className="col-4">
+        <div className="col-4 ms-auto">
           <button
+            type="button"
             className="btn btn-success"
             onClick={() => onAdd()}
           >
@@ -23,7 +25,7 @@ const CategoriesList: React.FC<Props> = ({ categories, onAdd, onEdit, onDelete }
         </div>
       </div>
       <div className="card-body">
-        <table className="table">
+        <table className="table table-responsive-sm">
           <thead className="thead-dark">
             <tr>
               <th scope="col">#</th>
@@ -38,7 +40,10 @@ const CategoriesList: React.FC<Props> = ({ categories, onAdd, onEdit, onDelete }
                 <td>{cat.name}</td>
                 <td>
                   <button className="btn btn-warning me-3" onClick={() => onEdit(cat)}>
-                    Editar
+                    <span className="d-block d-md-none">
+                      <i className="bi-pencil-square"></i>
+                    </span>
+                    <span className="d-none d-md-inline">Editar</span>
                   </button>
                   <button className="btn btn-danger" onClick={() => onDelete(cat)}>
                     Eliminar

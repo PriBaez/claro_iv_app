@@ -5,7 +5,6 @@ import { Category } from "@/models/Category";
 import { CategoriesService } from "@/services/CategoriesService";
 import { useEffect, useState } from "react";
 
-
 const initialState: Category = {
   id: 0,
   name: "",
@@ -33,7 +32,7 @@ const CategoriesPage = () => {
     }
   };
 
-  const handleAdition = async () => {
+  const handleAddition = async () => {
     setOpenModal(true);
   };
 
@@ -58,7 +57,7 @@ const CategoriesPage = () => {
     <>
       <CategoriesList
         categories={categories}
-        onAdd={handleAdition}
+        onAdd={handleAddition}
         onEdit={handleUpdate}
         onDelete={handleDelete}
       />
@@ -67,7 +66,7 @@ const CategoriesPage = () => {
       )}
 
       {openModal && isDeleting && (
-        <CategoriesDeleteModal category={category} isOpen={openModal} onClose={handleModalClose}/>
+        <CategoriesDeleteModal category={category} isOpen={openModal} onClose={handleModalClose} />
       )}
     </>
   );

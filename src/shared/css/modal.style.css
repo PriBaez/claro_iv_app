@@ -22,7 +22,7 @@
   width: 500px;
   height: fit-content;
   max-width: 90%;
-  max-height: 50vh; /* Evita que el modal sea demasiado alto */
+  max-height: 70vh; /* Evita que el modal sea demasiado alto */
   display: flex;
   flex-direction: column;
 }
