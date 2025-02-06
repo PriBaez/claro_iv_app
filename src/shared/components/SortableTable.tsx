@@ -5,12 +5,19 @@ interface SortConfig<T> {
   direction: "asc" | "desc";
 }
 
-interface SortableTableProps<T> {
-  data: T[];
-  columns: readonly { key: keyof T; label: string }[];
+interface Column<T> {
+  key: keyof T;
+  label: string;
+  render?: (item: T) => React.ReactNode; // Render personalizado
 }
 
-const SortableTable = <T,>({ data, columns }: SortableTableProps<T>) => {
+interface SortableTableProps<T> {
+  data: T[];
+  columns: readonly Column<T>[];
+  actions?: (item: T) => React.ReactNode; // Acciones personalizadas
+}
+
+const SortableTable = <T,>({ data, columns, actions }: SortableTableProps<T>) => {
   const [sortConfig, setSortConfig] = useState<SortConfig<T>>({
     key: null,
     direction: "asc",
@@ -42,7 +49,7 @@ const SortableTable = <T,>({ data, columns }: SortableTableProps<T>) => {
           : bValue.localeCompare(aValue);
       }
 
-      return 0; // Si no son ni números ni strings
+      return 0;
     });
 
     return sortableItems;
@@ -54,18 +61,19 @@ const SortableTable = <T,>({ data, columns }: SortableTableProps<T>) => {
         <tr>
           {columns.map((col) => (
             <th key={String(col.key)} onClick={() => requestSort(col.key)} style={{ cursor: "pointer" }}>
-              {col.label}{" "}
-              {sortConfig.key === col.key ? (sortConfig.direction === "asc" ? "↑" : "↓") : ""}
+              {col.label} {sortConfig.key === col.key ? (sortConfig.direction === "asc" ? "↑" : "↓") : ""}
             </th>
           ))}
+          {actions && <th>Acciones</th>}
         </tr>
       </thead>
       <tbody>
         {sortedData.map((item, index) => (
           <tr key={index}>
             {columns.map((col) => (
-              <td key={String(col.key)}>{String(item[col.key])}</td>
+              <td key={String(col.key)}>{col.render ? col.render(item) : String(item[col.key])}</td>
             ))}
+            {actions && <td>{actions(item)}</td>}
           </tr>
         ))}
       </tbody>

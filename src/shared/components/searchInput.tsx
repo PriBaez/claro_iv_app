@@ -1,41 +1,47 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 interface SearchProps {
   placeholder: string;
-  onSearch: (query: string) => void;
-  debounceTime?: number; // Opcional: para evitar llamadas excesivas a la función
+  onSearch: (query: string, field?: string) => void;
+  fields: { key: string; label: string }[]; // 🔑 Definición de campos de búsqueda
 }
 
-const Search: React.FC<SearchProps> = ({ placeholder, onSearch, debounceTime = 200 }) => {
-  const [query, setQuery] = useState<string>('');
-  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+const Search: React.FC<SearchProps> = ({ placeholder, onSearch, fields }) => {
+  const [query, setQuery] = useState("");
+  const [selectedField, setSelectedField] = useState<string | undefined>(undefined);
 
-  // Función para manejar el cambio en el campo de búsqueda
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setQuery(value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    onSearch(e.target.value, selectedField); // Enviar el campo seleccionado
+  };
 
-    // Si ya hay un temporizador, limpiarlo para que no se dispare múltiples veces
-    if (timer) {
-      clearTimeout(timer);
-    }
-
-    // Crear un nuevo temporizador para la búsqueda con debounce
-    const newTimer = setTimeout(() => {
-      onSearch(value); // Llamar la función de búsqueda cuando se termine el debounce
-    }, debounceTime);
-
-    setTimer(newTimer); // Guardar el nuevo temporizador
+  const handleFieldChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const field = e.target.value || undefined;
+    setSelectedField(field);
+    onSearch(query, field); // Mantener la búsqueda actual si cambia el campo
   };
 
   return (
-    <div className="search-container mb-3">
+    <div className="d-flex align-items-center gap-2 flex-grow-1">
+      <select
+        className="form-select w-auto flex-shrink-0"
+        onChange={handleFieldChange}
+        defaultValue=""
+      >
+        <option value="">Todos los campos</option>
+        {fields.map((field) => (
+          <option key={field.key} value={field.key}>
+            {field.label}
+          </option>
+        ))}
+      </select>
+
       <input
         type="text"
-        value={query}
-        onChange={handleSearchChange}
+        className="form-control flex-grow-1"
         placeholder={placeholder}
-        className="form-control"
+        value={query}
+        onChange={handleInputChange}
       />
     </div>
   );
