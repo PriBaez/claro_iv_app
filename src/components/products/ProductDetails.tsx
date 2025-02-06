@@ -30,8 +30,9 @@ const ProductDetails: React.FC<Props> = ({ variants, productName, isOpen, onClos
               &times;
             </button>
           </div>
-          <div className="modal-body"></div>
-          <SortableTable data={variants} columns={columns} />
+          <div className="modal-body">
+            <SortableTable data={variants} columns={columns} />
+          </div>
           <div className="modal-footer"></div>
         </div>
       </div>
