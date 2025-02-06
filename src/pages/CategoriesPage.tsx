@@ -14,6 +14,7 @@ const CategoriesPage = () => {
   const [category, setCategory] = useState<Category>(initialState);
   const [openModal, setOpenModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     try {
@@ -29,6 +30,8 @@ const CategoriesPage = () => {
       setCategories(response);
     } catch (error) {
       console.error("Error al obtener categorias", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,6 +63,7 @@ const CategoriesPage = () => {
         onAdd={handleAddition}
         onEdit={handleUpdate}
         onDelete={handleDelete}
+        isLoading={loading}
       />
       {openModal && (
         <CategoriesModal category={category} isOpen={openModal} onClose={handleModalClose} />

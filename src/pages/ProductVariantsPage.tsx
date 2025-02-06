@@ -21,12 +21,15 @@ const VariantsPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     try {
       fetchVariants();
     } catch (error) {
       console.log(error);
+    } finally {
+        setLoading(false);
     }
   }, [openModal]);
 
@@ -75,6 +78,7 @@ const VariantsPage = () => {
     <>
       <VariantsList
         variants={productVariants}
+        isLoading={loading}
         getProductName={getProductName}
         onAdd={handleAddition}
         onEdit={handleUpdate}

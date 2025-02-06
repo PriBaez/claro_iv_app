@@ -26,12 +26,15 @@ const ProductsPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [openDetailModal, setOpenDetailModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     try {
       fetchProduct();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }, [openModal]);
 
@@ -84,6 +87,7 @@ const ProductsPage = () => {
     <>
       <ProductList
         products={products}
+        isLoading={loading}
         getCategoryName={getCategory}
         onDetails={handleDetail}
         onAdd={handleAddition}
