@@ -90,7 +90,7 @@ const CategoriesModal: React.FC<Props> = ({ category, isOpen, onClose }) => {
             <button className="btn btn-secondary" onClick={() => onClose()}>
               Cancelar
             </button>
-            <button className="btn btn-primary" onClick={isEditing ? handleUpdate : handleCreate}>
+            <button className="btn btn-primary" onClick={isEditing ? handleUpdate : handleCreate} disabled={!cat.name}>
               {isEditing ? "Actualizar" : "Agregar"}
             </button>
           </div>

@@ -62,6 +62,18 @@ const VariantsModal: React.FC<Props> = ({ variant, products, isOpen, onClose }) 
       onClose();
     }
   };
+
+  // Validar los campos antes de habilitar el botón
+  const isFormValid = () => {
+    //NOTA: se puede introducir con stock igual a 0 
+    // por si necesita registrarse antes de que llegue el stock
+    return (
+      productVariant.productId !== 0 && // Asegurarse de que el producto está seleccionado
+      productVariant.color.trim() !== "" && // El color no debe estar vacío
+      productVariant.price > 0 // El precio debe ser mayor que 0
+    );
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -73,7 +85,7 @@ const VariantsModal: React.FC<Props> = ({ variant, products, isOpen, onClose }) 
       <div className="modal" tabIndex={-1}>
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{variant ? "Añadir Categoria" : "Editar Categoria"}</h5>
+            <h5 className="modal-title">{variant ? "Añadir Variantes" : "Editar Variantes"}</h5>
             <button type="button" className="btn-close" onClick={onClose}>
               &times;
             </button>
@@ -125,7 +137,7 @@ const VariantsModal: React.FC<Props> = ({ variant, products, isOpen, onClose }) 
                 className="form-control"
                 id="stock"
                 name="stock"
-                value={productVariant?.stock || 0}
+                value={productVariant?.stock}
                 onChange={handleChange}
               />
             </div>
@@ -139,7 +151,7 @@ const VariantsModal: React.FC<Props> = ({ variant, products, isOpen, onClose }) 
                 className="form-control"
                 id="price"
                 name="price"
-                value={productVariant?.price || 0}
+                value={productVariant?.price}
                 onChange={handleChange}
               />
             </div>
@@ -148,7 +160,7 @@ const VariantsModal: React.FC<Props> = ({ variant, products, isOpen, onClose }) 
             <button className="btn btn-secondary" onClick={() => onClose()}>
               Cancelar
             </button>
-            <button className="btn btn-primary" onClick={isEditing ? handleUpdate : handleCreate}>
+            <button className="btn btn-primary" onClick={isEditing ? handleUpdate : handleCreate} disabled={!isFormValid()}>
               {isEditing ? "Actualizar" : "Agregar"}
             </button>
           </div>
