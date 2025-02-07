@@ -3,7 +3,7 @@ import { useState } from "react";
 interface SearchProps {
   placeholder: string;
   onSearch: (query: string, field?: string) => void;
-  fields: { key: string; label: string }[]; // 🔑 Definición de campos de búsqueda
+  fields: { key: string; label: string }[];
 }
 
 const Search: React.FC<SearchProps> = ({ placeholder, onSearch, fields }) => {
@@ -12,13 +12,13 @@ const Search: React.FC<SearchProps> = ({ placeholder, onSearch, fields }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
-    onSearch(e.target.value, selectedField); // Enviar el campo seleccionado
+    onSearch(e.target.value, selectedField);
   };
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const field = e.target.value || undefined;
     setSelectedField(field);
-    onSearch(query, field); // Mantener la búsqueda actual si cambia el campo
+    onSearch(query, field);
   };
 
   return (

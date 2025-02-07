@@ -44,8 +44,9 @@ const ProductList: React.FC<Props> = ({
       render: (prod: ProductView) =>
         prod.colors && prod.colors.length > 0 ? (
           prod.colors.map((color, index) => (
-            <span key={index} className="badge bg-secondary rounded-pill me-1">
+            <span key={index}>
               {color}
+              {index < prod.colors.length - 1 && ", "}
             </span>
           ))
         ) : (
@@ -57,26 +58,17 @@ const ProductList: React.FC<Props> = ({
   const actions = (prod: ProductView) => (
     <>
       <button
-        className="btn btn-primary me-3 mb-2"
+        className="btn btn-primary me-2 mb-2"
         disabled={prod.productVariants.length == 0}
         onClick={() => onDetails(prod.productVariants, prod.name)}
       >
-        <span className="d-block d-lg-none">
-          <i className="bi bi-list-columns-reverse"></i>
-        </span>
-        <span className="d-none d-lg-inline">Details</span>
+        <i className="bi bi-list-columns-reverse"></i>
       </button>
-      <button className="btn btn-warning me-3 mb-2" onClick={() => onEdit(prod)}>
-        <span className="d-block d-lg-none">
-          <i className="bi-pencil-square"></i>
-        </span>
-        <span className="d-none d-lg-inline">Editar</span>
+      <button className="btn btn-warning me-2 mb-2" onClick={() => onEdit(prod)}>
+        <i className="bi-pencil-square"></i>
       </button>
-      <button className="btn btn-danger me-3 mb-2" onClick={() => onDelete(prod)}>
-        <span className="d-block d-lg-none">
-          <i className="bi bi-trash"></i>
-        </span>
-        <span className="d-none d-lg-inline">Eliminar</span>
+      <button className="btn btn-danger me-2 mb-2" onClick={() => onDelete(prod)}>
+        <i className="bi bi-trash"></i>
       </button>
     </>
   );
@@ -129,7 +121,7 @@ const ProductList: React.FC<Props> = ({
     <div className="container card text-center justify-content-end">
       <div className="card-header row">
         <div className="col-8 m-0 flex-grow-1">
-          <h5>Productos (Maestro)</h5>
+          <h5>Productos</h5>
         </div>
       </div>
       <div className="card-body">
@@ -139,6 +131,7 @@ const ProductList: React.FC<Props> = ({
             onSearch={(query, field) => {
               setSearchQuery(query);
               setSearchField(field);
+              setCurrentPage(1);
             }}
             fields={fields}
           />
@@ -153,12 +146,15 @@ const ProductList: React.FC<Props> = ({
         ) : (
           <>
             <SortableTable data={currentItems} columns={columns} actions={actions} />
-            <Pagination
-              currentPage={currentPage}
-              totalItems={filteredProducts.length}
-              itemsPerPage={itemsPerPage}
-              onPageChange={handlePageChange}
-            />
+            <div className="d-flex justify-content-between">
+              <Pagination
+                currentPage={currentPage}
+                totalItems={filteredProducts.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={handlePageChange}
+              />
+              <p className="ms-3 mt-2 fw-bolder">Cantidad de registros: {products.length}</p>
+            </div>
           </>
         )}
       </div>

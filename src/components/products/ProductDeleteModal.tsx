@@ -22,15 +22,12 @@ const ProductDeleteModal: React.FC<Props> = ({ product, getCategoryName, isOpen,
 
   return (
     <>
-      {/* Fondo oscuro */}
       <div className="modal-backdrop" onClick={onClose}></div>
-
-      {/* Modal */}
       <div className="modal" tabIndex={-1}>
         <div className="modal-content">
           <div className="modal-header text-bg-danger">
             <h5 className="modal-title">Eliminar categoria</h5>
-            <button type="button" className="btn-close" onClick={onClose}>
+            <button type="button" className="btn-close text-white" onClick={onClose}>
               &times;
             </button>
           </div>
@@ -52,8 +49,8 @@ const ProductDeleteModal: React.FC<Props> = ({ product, getCategoryName, isOpen,
             <button className="btn btn-secondary" onClick={() => onClose()}>
               Cancelar
             </button>
-            <button className="btn btn-warning" onClick={handleSubmit}>
-              Si, estoy seguro
+            <button className="btn btn-danger" onClick={handleSubmit}>
+              <i className="bi bi-trash"></i> Si, estoy seguro
             </button>
           </div>
         </div>

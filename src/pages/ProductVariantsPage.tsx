@@ -20,7 +20,7 @@ const VariantsPage = () => {
   const [productName, setProductName] = useState<string>("");
   const [products, setProducts] = useState<Product[]>([]);
   const [openModal, setOpenModal] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const VariantsPage = () => {
     } catch (error) {
       console.log(error);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   }, [openModal]);
 
@@ -57,15 +57,18 @@ const VariantsPage = () => {
 
   const handleDelete = async (variant: ProductVariant) => {
     setProductVariant(variant);
-    const name = getProductName(variant.id)
+    const name = getProductName(variant.id);
     setProductName(name);
-    setOpenModal(true);
-    setIsDeleting(true);
+    setOpenDeleteModal(true);
   };
 
   const handleModalClose = async () => {
     setOpenModal(false);
-    setIsDeleting(false);
+    setProductVariant(initialState);
+  };
+
+  const handleDeleteModalClose = async () => {
+    setOpenDeleteModal(false);
     setProductVariant(initialState);
   };
 
@@ -93,12 +96,12 @@ const VariantsPage = () => {
         />
       )}
 
-      {openModal && isDeleting && (
+      {openDeleteModal && (
         <VariantDeleteModal
           variant={productVariant}
           productName={productName}
-          isOpen={openModal}
-          onClose={handleModalClose}
+          isOpen={openDeleteModal}
+          onClose={handleDeleteModalClose}
         />
       )}
     </>

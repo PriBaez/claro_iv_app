@@ -22,27 +22,27 @@ const VariantDeleteModal: React.FC<Props> = ({ variant, productName, isOpen, onC
 
   return (
     <>
-      {/* Fondo oscuro */}
       <div className="modal-backdrop" onClick={onClose}></div>
 
-      {/* Modal */}
       <div className="modal" tabIndex={-1}>
         <div className="modal-content">
           <div className="modal-header text-bg-danger">
-            <h5 className="modal-title">Eliminar categoria</h5>
-            <button type="button" className="btn-close" onClick={onClose}>
+            <h5 className="modal-title">Eliminar variante</h5>
+            <button type="button" className="btn-close text-white" onClick={onClose}>
               &times;
             </button>
           </div>
           <div className="modal-body">
             <div className="d-flex flex-column mb-2">
-              <p>¿Está seguro de querer eliminar la siguiente categoria?</p>
-              <p>Esta decisión <b>no</b> se puede deshacer</p>
+              <p>¿Está seguro de querer eliminar la siguiente variante?</p>
+              <p>
+                Esta decisión <b>no</b> se puede deshacer
+              </p>
               <div className="flex-column">
                 <p>
-                  <b>producto:</b> {productName}
-                  <b>Color:</b> {variant.color}
-                  <b>Stock:</b> {variant.stock}
+                  <b>producto:</b> {productName} <br />
+                  <b>Color:</b> {variant.color} <br />
+                  <b>Stock:</b> {variant.stock} <br />
                   <b>Precio:</b> {variant.price}
                 </p>
               </div>
@@ -52,8 +52,8 @@ const VariantDeleteModal: React.FC<Props> = ({ variant, productName, isOpen, onC
             <button className="btn btn-secondary" onClick={() => onClose()}>
               Cancelar
             </button>
-            <button className="btn btn-warning" onClick={handleSubmit}>
-              Si, estoy seguro
+            <button className="btn btn-danger" onClick={handleSubmit}>
+              <i className="bi bi-trash"></i> Si, estoy seguro
             </button>
           </div>
         </div>

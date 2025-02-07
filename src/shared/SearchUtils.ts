@@ -7,7 +7,6 @@ export class SearchUtils {
     return Array.isArray(value);
   }
 
-  // 🔍 Búsqueda por campo específico o búsqueda global si no se define un campo
   static searchInObject(obj: unknown, query: string, field?: string): boolean {
     if (obj == null) return false;
 

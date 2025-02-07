@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# React Application - Technical Test
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Esta es una aplicación React que fue desarrollada como parte de una prueba técnica. El propósito de la aplicación es manejar un CRUD de productos, sus variantes y categorias.
 
-## Expanding the ESLint configuration
+### Características
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[Funcionalidad 1]: Mantenimiento de entidades.
+[Funcionalidad 2]: Filtrado de resultados.
+[Funcionalidad 3]: Paginacion de resultados.
 
-- Configure the top-level `parserOptions` property like this:
+## Instalación
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+#### Clona este repositorio en tu máquina local:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+`git clone https://github.com/usuario/repo.git`
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+#### Navega a la carpeta del proyecto:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+`cd nombre-del-proyecto`
+
+#### Instala las dependencias:
+
+`npm install`
+
+#### Inicia la aplicación en modo de desarrollo:
+
+`npm run dev`
+
+La aplicación estará disponible en http://localhost:5173.
+
+## Tecnologías Utilizadas
+
+- React: Biblioteca principal para la construcción de la interfaz de usuario.
+- CSS: Tecnología que permite darle un diseño, colores, fuentes diversas y estilizadas a la app.
+- Axios: biblioteca de JavaScript que se utiliza para hacer solicitudes HTTP desde el navegador y Node.js
+- Bootstrap: Biblioteca de componentes UI para la estilización de los componentes
+
+## Estructura del Proyecto
+
+- src/: Contiene el código fuente de la aplicación.
+- components/: Componentes por entidad.
+- models/: Modelos de datos principales.
+- pages/: Componentes donde interactuan uno o mas componentes para formar una sección.
+- services/: Funciones que manejan la lógica de la API y otros servicios.
+- shared/: Componentes reutilizables entre dos o más secciones.

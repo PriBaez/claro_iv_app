@@ -8,13 +8,13 @@ interface SortConfig<T> {
 interface Column<T> {
   key: keyof T;
   label: string;
-  render?: (item: T) => React.ReactNode; // Render personalizado
+  render?: (item: T) => React.ReactNode;
 }
 
 interface SortableTableProps<T> {
   data: T[];
   columns: readonly Column<T>[];
-  actions?: (item: T) => React.ReactNode; // Acciones personalizadas
+  actions?: (item: T) => React.ReactNode;
 }
 
 const SortableTable = <T,>({ data, columns, actions }: SortableTableProps<T>) => {
@@ -60,8 +60,13 @@ const SortableTable = <T,>({ data, columns, actions }: SortableTableProps<T>) =>
       <thead className="thead-dark">
         <tr>
           {columns.map((col) => (
-            <th key={String(col.key)} onClick={() => requestSort(col.key)} style={{ cursor: "pointer" }}>
-              {col.label} {sortConfig.key === col.key ? (sortConfig.direction === "asc" ? "↑" : "↓") : ""}
+            <th
+              key={String(col.key)}
+              onClick={() => requestSort(col.key)}
+              style={{ cursor: "pointer" }}
+            >
+              {col.label}{" "}
+              {sortConfig.key === col.key ? (sortConfig.direction === "asc" ? "↑" : "↓") : ""}
             </th>
           ))}
           {actions && <th>Acciones</th>}

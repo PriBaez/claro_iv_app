@@ -26,7 +26,7 @@ const CategoriesList: React.FC<Props> = ({ categories, onAdd, onEdit, onDelete, 
   const fields = [
     { key: "id", label: "ID" },
     { key: "name", label: "Nombre" },
-  ]; // 📋 Campos disponibles para la búsqueda
+  ];
 
   const searchInObject = useCallback(
     (obj: unknown, query: string, field?: string) => SearchUtils.searchInObject(obj, query, field),
@@ -35,17 +35,11 @@ const CategoriesList: React.FC<Props> = ({ categories, onAdd, onEdit, onDelete, 
 
   const actions = (cat: Category) => (
     <>
-      <button className="btn btn-warning me-3" onClick={() => onEdit(cat)}>
-        <span className="d-block d-lg-none">
-          <i className="bi-pencil-square"></i>
-        </span>
-        <span className="d-none d-lg-inline">Editar</span>
+      <button className="btn btn-warning me-2" onClick={() => onEdit(cat)}>
+        <i className="bi-pencil-square"></i>
       </button>
       <button className="btn btn-danger" onClick={() => onDelete(cat)}>
-        <span className="d-block d-lg-none">
-          <i className="bi bi-trash"></i>
-        </span>
-        <span className="d-none d-lg-inline">Eliminar</span>
+        <i className="bi bi-trash"></i>
       </button>
     </>
   );
@@ -77,6 +71,7 @@ const CategoriesList: React.FC<Props> = ({ categories, onAdd, onEdit, onDelete, 
             onSearch={(query, field) => {
               setSearchQuery(query);
               setSearchField(field);
+              setCurrentPage(1);
             }}
             fields={fields}
           />
@@ -91,12 +86,15 @@ const CategoriesList: React.FC<Props> = ({ categories, onAdd, onEdit, onDelete, 
         ) : (
           <>
             <SortableTable data={currentItems} columns={columns} actions={actions} />
-            <Pagination
-              currentPage={currentPage}
-              totalItems={filteredCategories.length}
-              itemsPerPage={itemsPerPage}
-              onPageChange={handlePageChange}
-            />
+            <div className="d-flex justify-content-between">
+              <Pagination
+                currentPage={currentPage}
+                totalItems={filteredCategories.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={handlePageChange}
+              />
+              <p className="ms-3 mt-2 fw-bolder">Cantidad de registros: {categories.length}</p>
+            </div>
           </>
         )}
       </div>

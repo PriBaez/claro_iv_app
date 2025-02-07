@@ -1,3 +1,7 @@
 .navbar ul a.active {
     font-weight: bold;
    }
+
+   .navbar {
+    background-color: 	#DC3545;
+   }

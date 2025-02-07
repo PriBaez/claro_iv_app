@@ -15,7 +15,14 @@ interface Props {
   onDelete: (variant: ProductVariant) => void;
 }
 
-const VariantsList: React.FC<Props> = ({ variants, isLoading, getProductName, onAdd, onEdit, onDelete }) => {
+const VariantsList: React.FC<Props> = ({
+  variants,
+  isLoading,
+  getProductName,
+  onAdd,
+  onEdit,
+  onDelete,
+}) => {
   const [searchQuery, setSearchQuery] = useState<string>(""); // Estado para la búsqueda
   const [searchField, setSearchField] = useState<string | undefined>(undefined);
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,14 +40,11 @@ const VariantsList: React.FC<Props> = ({ variants, isLoading, getProductName, on
   ] as const;
   const actions = (variant: ProductVariant) => (
     <>
-      <button className="btn btn-warning me-3" onClick={() => onEdit(variant)}>
-        <span className="d-block d-md-none">
-          <i className="bi-pencil-square"></i>
-        </span>
-        <span className="d-none d-md-inline">Editar</span>
+      <button className="btn btn-warning me-2" onClick={() => onEdit(variant)}>
+        <i className="bi-pencil-square"></i>
       </button>
       <button className="btn btn-danger" onClick={() => onDelete(variant)}>
-        Eliminar
+        <i className="bi bi-trash"></i>
       </button>
     </>
   );
@@ -54,10 +58,10 @@ const VariantsList: React.FC<Props> = ({ variants, isLoading, getProductName, on
     { key: "color", label: "Color" },
     { key: "stock", label: "Stock" },
     { key: "price", label: "Precio" },
-  ]
+  ];
 
   const searchInObject = useCallback(
-    (obj: unknown, query: string, field?:string) => SearchUtils.searchInObject(obj, query, field),
+    (obj: unknown, query: string, field?: string) => SearchUtils.searchInObject(obj, query, field),
     []
   );
 
@@ -86,8 +90,9 @@ const VariantsList: React.FC<Props> = ({ variants, isLoading, getProductName, on
           <Search
             placeholder="Buscar en variantes..."
             onSearch={(query, field) => {
-              setSearchQuery(query)
-              setSearchField(field)
+              setSearchQuery(query);
+              setSearchField(field);
+              setCurrentPage(1);
             }}
             fields={fields}
           />
@@ -102,12 +107,15 @@ const VariantsList: React.FC<Props> = ({ variants, isLoading, getProductName, on
         ) : (
           <>
             <SortableTable data={currentItems} columns={columns} actions={actions} />
-            <Pagination
-              currentPage={currentPage}
-              totalItems={filteredVariants.length}
-              itemsPerPage={itemsPerPage}
-              onPageChange={handlePageChange}
-            />
+            <div className="d-flex justify-content-between">
+              <Pagination
+                currentPage={currentPage}
+                totalItems={filteredVariants.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={handlePageChange}
+              />
+              <p className="ms-3 mt-2 fw-bolder">Cantidad de registros: {variants.length}</p>
+            </div>
           </>
         )}
       </div>

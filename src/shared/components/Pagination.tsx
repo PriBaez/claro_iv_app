@@ -1,5 +1,6 @@
 // Pagination.tsx
 import React from "react";
+import "@shared/css/pagination.style.css";
 
 interface PaginationProps {
   currentPage: number;
@@ -29,23 +30,23 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <nav aria-label="Page navigation example" className="d-flex justify-content-center">
+    <nav aria-label="Page navigation" className="d-flex justify-content-start">
       <ul className="pagination text-center">
-        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
           <button className="page-link" onClick={handlePrevious} disabled={currentPage === 1}>
-            Previous
+            <span aria-hidden="true" className="text-info">&laquo;</span>
           </button>
         </li>
         {Array.from({ length: totalPages }, (_, index) => (
-          <li key={index + 1} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-            <button className="page-link" onClick={() => onPageChange(index + 1)}>
+          <li key={index + 1} className={`page-item ${currentPage === index + 1 ? "active custom-active" : ""}`}>
+            <button className={`page-link ${currentPage === index + 1 ? "": "text-info"}`} onClick={() => onPageChange(index + 1)}>
               {index + 1}
             </button>
           </li>
         ))}
-        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-          <button className="page-link" onClick={handleNext} disabled={currentPage === totalPages}>
-            Next
+        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+          <button className="page-link " onClick={handleNext} disabled={currentPage === totalPages}>
+            <span aria-hidden="true" className="text-info">&raquo;</span>
           </button>
         </li>
       </ul>

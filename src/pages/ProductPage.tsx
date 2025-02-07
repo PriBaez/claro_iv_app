@@ -53,7 +53,7 @@ const ProductsPage = () => {
 
   const handleDetail = async (variants: ProductVariant[], productName: string) => {
     SetVariants(variants);
-    setProductName(productName)
+    setProductName(productName);
     setOpenDetailModal(true);
   };
 
@@ -113,7 +113,12 @@ const ProductsPage = () => {
       )}
 
       {openDetailModal && (
-        <ProductDetails variants={variants} productName={productName} isOpen={openDetailModal} onClose={() => setOpenDetailModal(false)} />
+        <ProductDetails
+          variants={variants}
+          productName={productName}
+          isOpen={openDetailModal}
+          onClose={() => setOpenDetailModal(false)}
+        />
       )}
     </>
   );

@@ -15,7 +15,7 @@ const initialState: Product = {
   id: 0,
   name: "",
   categoryId: 0,
-  productVariants: []
+  productVariants: [],
 };
 
 const ProductModal: React.FC<Props> = ({ product, categories, isOpen, onClose }) => {
@@ -30,7 +30,9 @@ const ProductModal: React.FC<Props> = ({ product, categories, isOpen, onClose })
   }, [product]);
 
   // Manejador de cambios en el formulario
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setProduct((prevState) => ({
       ...prevState,
@@ -58,7 +60,7 @@ const ProductModal: React.FC<Props> = ({ product, categories, isOpen, onClose })
       onClose();
     }
   };
-  
+
   if (!isOpen) return null;
 
   return (
@@ -66,9 +68,11 @@ const ProductModal: React.FC<Props> = ({ product, categories, isOpen, onClose })
       <div className="modal-backdrop" onClick={onClose}></div>
       <div className="modal" tabIndex={-1}>
         <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{product ? "Añadir Producto" : "Editar Producto"}</h5>
-            <button type="button" className="btn-close" onClick={onClose}>
+          <div className="modal-header bg-danger">
+            <h5 className="modal-title text-white">
+              {product.id != 0 ? "Editar Producto" : "Añadir Producto"}
+            </h5>
+            <button type="button" className="btn-close text-white" onClick={onClose}>
               &times;
             </button>
           </div>
@@ -113,7 +117,11 @@ const ProductModal: React.FC<Props> = ({ product, categories, isOpen, onClose })
             <button className="btn btn-secondary" onClick={() => onClose()}>
               Cancelar
             </button>
-            <button className="btn btn-primary" disabled={!prod.name || !prod.categoryId} onClick={isEditing ? handleUpdate : handleCreate}>
+            <button
+              className="btn btn-success"
+              disabled={!prod.name || !prod.categoryId}
+              onClick={isEditing ? handleUpdate : handleCreate}
+            >
               {isEditing ? "Actualizar" : "Agregar"}
             </button>
           </div>

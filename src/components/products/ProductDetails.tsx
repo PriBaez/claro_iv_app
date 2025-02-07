@@ -24,9 +24,9 @@ const ProductDetails: React.FC<Props> = ({ variants, productName, isOpen, onClos
       <div className="modal-backdrop" onClick={onClose}></div>
       <div className="modal" tabIndex={-1}>
         <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{productName}</h5>
-            <button type="button" className="btn-close" onClick={onClose}>
+          <div className="modal-header bg-danger">
+            <h5 className="modal-title text-white">{productName}</h5>
+            <button type="button" className="btn-close text-white" onClick={onClose}>
               &times;
             </button>
           </div>

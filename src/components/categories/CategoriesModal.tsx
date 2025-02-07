@@ -25,7 +25,6 @@ const CategoriesModal: React.FC<Props> = ({ category, isOpen, onClose }) => {
     }
   }, [category]);
 
-  // Manejador de cambios en el formulario
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCat((prevState) => ({
@@ -58,15 +57,15 @@ const CategoriesModal: React.FC<Props> = ({ category, isOpen, onClose }) => {
 
   return (
     <>
-      {/* Fondo oscuro */}
       <div className="modal-backdrop" onClick={onClose}></div>
 
-      {/* Modal */}
       <div className="modal" tabIndex={-1}>
         <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{category ? "Añadir Categoria" : "Editar Categoria"}</h5>
-            <button type="button" className="btn-close" onClick={onClose}>
+          <div className="modal-header bg-danger">
+            <h5 className="modal-title text-white">
+              {category.id === 0 ? "Añadir Categoria" : "Editar Categoria"}
+            </h5>
+            <button type="button" className="btn-close text-white" onClick={onClose}>
               &times;
             </button>
           </div>
@@ -90,7 +89,11 @@ const CategoriesModal: React.FC<Props> = ({ category, isOpen, onClose }) => {
             <button className="btn btn-secondary" onClick={() => onClose()}>
               Cancelar
             </button>
-            <button className="btn btn-primary" onClick={isEditing ? handleUpdate : handleCreate} disabled={!cat.name}>
+            <button
+              className="btn btn-success"
+              onClick={isEditing ? handleUpdate : handleCreate}
+              disabled={!cat.name}
+            >
               {isEditing ? "Actualizar" : "Agregar"}
             </button>
           </div>

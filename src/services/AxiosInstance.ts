@@ -18,18 +18,15 @@ api.interceptors.response.use(
 const handleError = (error: AxiosError) => {
   if (error.response) {
     return {
-      //Manejo de errores convencionales (404, 401, 500...)
       status: error.response.status,
       message: error.response.data || "Error en la respuesta del servidor",
     };
   } else if (error.request) {
-    //  Manejo de errores ante NO respuesta del API
     return {
       status: 0,
       message: "No se recibió respuesta del servidor. Verifica tu conexión.",
     };
   } else {
-    // Manejo de errores inesperado
     return {
       status: -1,
       message: "Error inesperado al procesar la solicitud.",
