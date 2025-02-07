@@ -1,4 +1,3 @@
-
 # React Application - Technical Test
 
 ## Overview
@@ -46,3 +45,21 @@ La aplicación estará disponible en http://localhost:5173.
 - pages/: Componentes donde interactuan uno o mas componentes para formar una sección.
 - services/: Funciones que manejan la lógica de la API y otros servicios.
 - shared/: Componentes reutilizables entre dos o más secciones.
+
+## Imagenes de referencia
+
+![CRUD Productos](doc/image.png)
+
+![CRUD Categorias](doc/image-1.png)
+
+![CRUD Variantes](doc/image-2.png)
+
+![Detalle Productos](doc/image-3.png)
+
+![Añadir Variante](doc/image-4.png)
+
+![Editar Variante](doc/image-5.png)
+
+![Eliminar Variante](doc/image-6.png)
+
+![SideNav](doc/image-7.png)
